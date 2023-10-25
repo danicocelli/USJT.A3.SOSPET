@@ -11,14 +11,20 @@ namespace PROJETO.A3.USJT.Models
 
         public Int32? PetsAcolhidos { get; set; }
 
+        #region Count Pizza Pizza
         public Int32? GatosContagem { get; set; }
 
         public Int32? CachorrosContagem { get; set; }
+        #endregion Count Pizza
 
-        //public struct Data
-        //{
+        #region 15 Days Chart
+        public List<Int32>? Acolhidos15DaysChart { get; set; }
 
-        //}
+        public List<Int32>? Doados15DaysChart { get; set; }
 
+        public List<String>? Datas15DaysChart { get; set; }
+        #endregion 15 Days Chart
     }
+
 }
+

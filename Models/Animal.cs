@@ -27,10 +27,18 @@ namespace PROJETO.A3.USJT.Models
         [Column("DATA_ACOLHIMENTO")]
         public DateTimeOffset DataAcolhimento { get; set; }
 
+        [Column("DATA_DOACAO")]
+        public DateTimeOffset? DataDoacao { get; set; }
+
         [Required]
         [Column("DISPONIVEL")]
         [DefaultValue("S")]
         public String? Disponivel { get; set; }
+
+        //[Required]
+        //[Column("DOADO")]
+        //[DefaultValue("N")]
+        //public String? Doado { get; set; }
 
         [Column("DESCRICAO")]
         public String? Descricao { get; set; }

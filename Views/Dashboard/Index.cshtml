@@ -1,7 +1,7 @@
 ﻿@model PROJETO.A3.USJT.Models.Dashboard
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/_LayoutPortal.cshtml";
 }
 
@@ -63,16 +63,25 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
+    var doados = @System.Text.Json.JsonSerializer.Serialize(Model.Doados15DaysChart);
+    var acolhidos = @System.Text.Json.JsonSerializer.Serialize(Model.Acolhidos15DaysChart);
+    @{
+        string json = System.Text.Json.JsonSerializer.Serialize(Model.Datas15DaysChart);
+        string jsonArray = $"JSON.parse('{json}')";
+    }
+    var datas = @Html.Raw(jsonArray);
+    console.log(datas);
+
     //grafico de barras
     var options = {
         series: [{
             name: 'Doados',
             type: 'column',
-            data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
+            data: doados
         }, {
             name: 'Acolhidos',
             type: 'line',
-            data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
+            data: acolhidos
         }],
         chart: {
             height: 350,
@@ -88,9 +97,9 @@
             enabled: true,
             enabledOnSeries: [1]
         },
-        labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
+        labels: datas,
         xaxis: {
-            type: 'datetime'
+            type: 'text'
         },
         yaxis: [{
             title: {
