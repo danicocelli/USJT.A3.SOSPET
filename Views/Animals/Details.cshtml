@@ -1,0 +1,95 @@
+﻿@model PROJETO.A3.USJT.Models.Animal
+
+@{
+    ViewData["Title"] = "Detalhes - SOSPET";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container" style="margin-top: 120px">
+    
+
+    <div>
+        <h4>Mais informações sobre @Html.DisplayFor(model => model.NomeAnimal)</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                Nome do Animal
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NomeAnimal)
+            </dd>
+            <dt class="col-sm-2">
+                Data Nascimento
+            </dt>
+            <dd class="col-sm-10">
+                @(((System.DateTimeOffset)Model.DataNascimento).ToString("dd/MM/yyyy"))
+
+            </dd>
+            <dt class="col-sm-2">
+                Data de Acolhimento
+            </dt>
+            <dd class="col-sm-10">
+                @(((System.DateTimeOffset)Model.DataAcolhimento).ToString("dd/MM/yyyy"))
+            </dd>
+            <dt class="col-sm-2">
+                Disponível?
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Disponivel)
+            </dd>
+            <dt class="col-sm-2">
+              Descrição
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Descricao)
+            </dd>
+            <dt class="col-sm-2">
+                Local de Encontro
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.LocalEncontro)
+            </dd>
+            <dt class="col-sm-2">
+                Observações de Saúde/Sanitárias
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ObservacaoSaude)
+            </dd>
+            <dt class="col-sm-2">
+                Voluntário Responsável
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Voluntario)
+            </dd>
+            <dt class="col-sm-2">
+                Cor
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cor)
+            </dd>
+            <dt class="col-sm-2">
+                Diretório de Imagem
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DiretorioImagem)
+            </dd>
+            <dt class="col-sm-2">
+                Espécie
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CategoriaAnimal)
+            </dd>
+            <dt class="col-sm-2">
+               Gênero
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Genero)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Index" class=" btn btn-secondary">Voltar para Lista</a>
+        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model?.AnimalId">Editar</a>
+    </div>
+</div>

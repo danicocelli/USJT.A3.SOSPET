@@ -1,0 +1,163 @@
+﻿@model PROJETO.A3.USJT.Models.Animal
+@using PROJETO.A3.USJT.Models.Enums
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_LayoutPortal.cshtml";
+}
+
+
+<div class="container">
+    <h3>Edição de PET</h3>
+
+
+    <div class="row">
+        <div class="container">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="AnimalId" />
+                <h5 class="mt-4">Dados Cadastrais</h5>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label asp-for="NomeAnimal" class="control-label">Nome do Animal</label>
+                            <input asp-for="NomeAnimal" class="form-control" />
+                            <span asp-validation-for="NomeAnimal" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label asp-for="DataNascimento" class="control-label">Data de Nascimento</label>
+                            <input type="date" asp-for="DataNascimento" class="form-control" />
+                            <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label asp-for="Cor" class="control-label"></label>
+                            <input asp-for="Cor" class="form-control" />
+                            <span asp-validation-for="Cor" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 mt-3">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label asp-for="CategoriaAnimal" class="control-label">Espécie</label>
+                                <select asp-for="CategoriaAnimal" class="form-control">
+                                    @foreach (var value in Enum.GetValues(typeof(CategoriaAnimal)))
+                                    {
+                                        <option value="@value">@value</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="CategoriaAnimal" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 mt-3">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label asp-for="Genero" class="control-label">Gênero</label>
+                                <select asp-for="Genero" class="form-control">
+                                    @foreach (var value in Enum.GetValues(typeof(Genero)))
+                                    {
+                                        <option value="@value">@value</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="Genero" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 mt-3">
+                        <div class="form-group">
+                            <label asp-for="DiretorioImagem" class="control-label">Anexar Imagem do PET</label>
+                            <input asp-for="DiretorioImagem" type="file" class="form-control" />
+                            <span asp-validation-for="DiretorioImagem" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 mt-3">
+                        <div class="form-group">
+                            <label asp-for="Disponivel" class="control-label">Disponível para doação?</label>
+                            <br />
+                            <div style="margin-top:10px;">
+                                <input type="radio" asp-for="Disponivel" value="S" /> Sim
+                                <input type="radio" asp-for="Disponivel" value="N" /> Não
+                                <span asp-validation-for="Disponivel" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="mt-5">Dados Informativos</h5>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label asp-for="LocalEncontro" class="control-label">Local de Encontro</label>
+                            <input asp-for="LocalEncontro" class="form-control" />
+                            <span asp-validation-for="LocalEncontro" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label asp-for="DataAcolhimento" class="control-label">Data de Acolhimento</label>
+                            <input type="date" asp-for="DataAcolhimento" class="form-control" />
+                            <span asp-validation-for="DataAcolhimento" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label asp-for="VoluntarioResponsavelId" class="control-label">Voluntário Responsável</label>
+                            <input asp-for="VoluntarioResponsavelId" class="form-control" />
+                            <span asp-validation-for="VoluntarioResponsavelId" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 mt-3">
+                        <div class="form-group">
+                            <label asp-for="ObservacaoSaude" class="control-label">Observações Sanitárias/Médicas</label>
+                            <textarea asp-for="ObservacaoSaude" rows="5" class="form-control"></textarea>
+                            <span asp-validation-for="ObservacaoSaude" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                        <div class="form-group">
+                            <label asp-for="Descricao" class="control-label">Descrição Adicional</label>
+                            <textarea asp-for="Descricao" rows="5" class="form-control"></textarea>
+                            <span asp-validation-for="Descricao" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 mt-3">
+                        <div class="form-group">
+                            <a asp-action="Index" class="btn btn-secondary">Voltar para lista</a>
+                            <input type="submit" value="Editar" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

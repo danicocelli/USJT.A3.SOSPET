@@ -1,0 +1,93 @@
+﻿@model IEnumerable<PROJETO.A3.USJT.Models.Animal>
+
+@{
+    ViewData["Title"] = "Controle de Animais";
+    Layout = "~/Views/Shared/_LayoutPortal.cshtml";
+}
+
+<div class="container">
+    <h3>Controle de Animais</h3>
+    <div class="row">
+        <div class="col-sm-6">
+            <h5 class=" mt-3 mb-4">Aqui estão os animais cadastrados na plataforma:</h5>
+        </div>
+        <div class="col-sm-6 text-end">
+            <a asp-controller="Dashboard" asp-action="Index" class="btn btn-primary mt-3 mb-"><i class="fa-solid fa-house"></i> Dashboard</a>
+            <a asp-action="Create" class="btn btn-success mt-3 mb-"><i class="fa-solid fa-circle-plus"></i> Novo animal</a>
+        </div>
+        <hr />
+    </div>
+
+    <table class="display" id="tableAnimais">
+        <thead>
+            <tr>
+                <th>
+                    Nome do Animal
+                </th>
+                <th>
+                    Nascido em
+                </th>
+                <th>
+                    Acolhido em
+                </th>
+                <th>
+                    Disponível?
+                </th>
+                <th>
+                    Voluntário
+                </th>
+                <th>
+                    Cor
+                </th>
+                <th>
+                    Espécie
+                </th>
+                <th>
+                    Gênero
+                </th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeAnimal)
+                    </td>
+                    <td>
+                        @item.DataNascimento.ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        @item.DataAcolhimento.ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        @{
+                            string disponivel = (item.Disponivel == "S") ? "Sim" : "Não";
+                        }
+                        @Html.DisplayFor(modelItem => disponivel)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Voluntario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoriaAnimal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Genero)
+                    </td>
+                    <td style="width:70px">
+                        <a asp-action="Edit" asp-route-id="@item.AnimalId"> <i class="fa-solid fa-pen" style="color: dimgray"> </i></a>
+                        <a asp-action="Details" asp-route-id="@item.AnimalId"> <i class="fa-solid fa-book" style="color:  dimgray"> </i></a>
+                        <a asp-action="Delete" asp-route-id="@item.AnimalId"> <i class="fa-solid fa-trash" style="color:  dimgray"> </i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

@@ -11,12 +11,13 @@ namespace PROJETO.A3.USJT.Models
     {
         [Key]
         [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("ID_ANIMAL")]
-        public int AnimalId { get; set; }
+        public String? AnimalId { get; set; }
 
         [Required]
         [Column("NOME")]
-        public String NomeAnimal { get; set; }
+        public String? NomeAnimal { get; set; }
 
         [Required]
         [Column("DATA_NASC")]
@@ -29,7 +30,7 @@ namespace PROJETO.A3.USJT.Models
         [Required]
         [Column("DISPONIVEL")]
         [DefaultValue("S")]
-        public String Disponivel { get; set; }
+        public String? Disponivel { get; set; }
 
         [Column("DESCRICAO")]
         public String? Descricao { get; set; }
@@ -44,7 +45,7 @@ namespace PROJETO.A3.USJT.Models
         public String? VoluntarioResponsavelId { get; set; }
 
         [IgnoreDataMember]
-        public String  Voluntario { get; set; }
+        public String?  Voluntario { get; set; }
 
         [Column("COR")]
         public String? Cor { get; set; }
@@ -55,10 +56,10 @@ namespace PROJETO.A3.USJT.Models
         #region enumModel
 
         [Column("CATEGORIA")]
-        public CategoriaAnimal CategoriaAnimal { get; set; }
+        public CategoriaAnimal? CategoriaAnimal { get; set; }
 
         [Column("GENERO")]
-        public Genero Genero { get; set; }
+        public Genero? Genero { get; set; }
 
         #endregion enumModel
     }

@@ -1,21 +1,16 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 
 namespace PROJETO.A3.USJT.Models
 {
-    [Table("CAD_USUARIO")]
+    [Table("SIS_USUARIO")]
     public class Usuario
     {
         [Key]
         [Column("ID_USUARIO")]
         public String UsuarioId { get; set; }
-
-        [Column("NOME")]
-        public String Nome { get; set; }
-
-        [Column("EMAIL")]
-        public String Email { get; set; }
 
         [Column("USUARIO")]
         public String Username { get; set; }
@@ -26,5 +21,11 @@ namespace PROJETO.A3.USJT.Models
         [Column("ATIVO")]
         [DefaultValue("S")]
         public String Ativo { get; set; }
+
+        [Column("ID_VOLUNTARIO")]
+        public String VoluntarioId { get; set; }
+
+        [IgnoreDataMember]
+        public Voluntario Voluntario { get; set; }
     }
 }
