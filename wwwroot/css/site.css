@@ -284,5 +284,7 @@ html {
     transition: .6s all ease;
 }
 
-
+.menu-a-icon {
+    margin-right: 10px;
+}
 

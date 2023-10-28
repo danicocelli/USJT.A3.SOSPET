@@ -12,7 +12,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-sm-6">
-                    <h5 style="margin-top: 10px">Cadastrados na Plataforma:</h5>
+                    <h5 style="margin-top: 10px">Cadastrados na Plataforma</h5>
                 </div>
                 <div class="col-sm-6 text-end">
                     <a asp-controller="Dashboard" asp-action="Index" class="btn btn-primary mt-1 mb-1"><i class="fa-solid fa-house"></i> Dashboard</a>
@@ -25,25 +25,19 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.Titulo)
+                            Título
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.DescBreve)
+                            Subtítulo
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.DataEvento)
+                            Oocorrerá em
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Descricao)
+                            Voluntário Responsável
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ImageDirectory)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.DataInclusao)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Endereco)
+                            Postado em
                         </th>
                         <th>Ações</th>
                     </tr>
@@ -59,19 +53,13 @@
                                 @Html.DisplayFor(modelItem => item.DescBreve)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.DataEvento)
+                                @item.DataEvento.ToString("dd/MM/yyyy")
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Descricao)
+                                @Html.DisplayFor(modelItem => item.VoluntarioId)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.ImageDirectory)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DataInclusao)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Endereco)
+                                @item.DataInclusao.ToString("dd/MM/yyyy")
                             </td>
                             <td style="width:70px">
                                 <a asp-action="Edit" asp-route-id="@item.EventoId"> <i class="fa-solid fa-pen" style="color: dimgray"> </i></a>

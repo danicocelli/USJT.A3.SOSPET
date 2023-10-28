@@ -25,7 +25,7 @@ namespace PROJETO.A3.USJT.Models
         [Column("ID_VOLUNTARIO")]
         public String VoluntarioId { get; set; }
 
-        [IgnoreDataMember]
+        [ForeignKey("VoluntarioId")]
         public Voluntario Voluntario { get; set; }
 
         [Column("USUARIO_INCLUSAO")]
