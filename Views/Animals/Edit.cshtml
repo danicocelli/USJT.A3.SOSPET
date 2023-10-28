@@ -78,12 +78,15 @@
                     </div>
                     <div class="col-sm-4 mt-3">
                         <div class="form-group">
-                            <label asp-for="Disponivel" class="control-label">Disponível para doação?</label>
-                            <br />
-                            <div style="margin-top:10px;">
-                                <input type="radio" asp-for="Disponivel" value="S" /> Sim
-                                <input type="radio" asp-for="Disponivel" value="N" /> Não
-                                <span asp-validation-for="Disponivel" class="text-danger"></span>
+                            <div class="form-group">
+                                <label asp-for="SituacaoAnimal" class="control-label">Situação do PET</label>
+                                <select asp-for="SituacaoAnimal" class="form-control">
+                                    @foreach (var value in Enum.GetValues(typeof(SituacaoAnimal)))
+                                    {
+                                        <option value="@value">@value</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="SituacaoAnimal" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -107,9 +110,9 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label asp-for="VoluntarioResponsavelId" class="control-label">Voluntário Responsável</label>
-                            <input asp-for="VoluntarioResponsavelId" class="form-control" />
-                            <span asp-validation-for="VoluntarioResponsavelId" class="text-danger"></span>
+                            <label asp-for="VoluntarioId" class="control-label">Voluntário Responsável</label>
+                            <input asp-for="VoluntarioId" class="form-control" />
+                            <span asp-validation-for="VoluntarioId" class="text-danger"></span>
                         </div>
                     </div>
                 </div>

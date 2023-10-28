@@ -4,8 +4,9 @@
     {
         Vacina = 0,
         Remedio = 1,
-        Racao = 2,
+        Comida = 2,
         Vitamina = 3,
-        Vestimenta = 4
+        Vestimenta = 4,
+        Outros = 5
     }
 }

@@ -2,10 +2,10 @@
 {
     public enum SituacaoRecurso
     {
-        Zerado = 1,
-        Crítico = 2,
-        Baixo = 3,
-        Ok = 4,
-        Completo = 5
+        Zerado = 0,
+        Crítico = 1,
+        Baixo = 2,
+        Ok = 3,
+        Completo = 4
     }
 }

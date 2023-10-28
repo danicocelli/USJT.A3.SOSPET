@@ -7,7 +7,7 @@ using PROJETO.A3.USJT.Models.Enums;
 namespace PROJETO.A3.USJT.Models
 {
     [Table("CAD_ANIMAL")]
-    public class Animal
+    public class Animal 
     {
         [Key]
         [Required]
@@ -20,7 +20,11 @@ namespace PROJETO.A3.USJT.Models
         public String? NomeAnimal { get; set; }
 
         [Required]
-        [Column("DATA_NASC")]
+        [Column("REGISTRO")]
+        public String? Registro { get; set; }
+
+        [Required]
+        [Column("DATA_NASCIMENTO")]
         public DateTimeOffset DataNascimento { get; set; }
 
         [Required]
@@ -29,17 +33,7 @@ namespace PROJETO.A3.USJT.Models
 
         [Column("DATA_DOACAO")]
         public DateTimeOffset? DataDoacao { get; set; }
-
-        [Required]
-        [Column("DISPONIVEL")]
-        [DefaultValue("S")]
-        public String? Disponivel { get; set; }
-
-        //[Required]
-        //[Column("DOADO")]
-        //[DefaultValue("N")]
-        //public String? Doado { get; set; }
-
+  
         [Column("DESCRICAO")]
         public String? Descricao { get; set; }
 
@@ -49,11 +43,12 @@ namespace PROJETO.A3.USJT.Models
         [Column("OBS_SAUDE")]
         public String? ObservacaoSaude { get; set; }
 
+        [Required]
         [Column("ID_VOLUNTARIO")]
-        public String? VoluntarioResponsavelId { get; set; }
+        public String VoluntarioId { get; set; }
 
-        [IgnoreDataMember]
-        public String?  Voluntario { get; set; }
+        [ForeignKey("VoluntarioId")]
+        public Voluntario Voluntario { get; set; }
 
         [Column("COR")]
         public String? Cor { get; set; }
@@ -63,12 +58,30 @@ namespace PROJETO.A3.USJT.Models
 
         #region enumModel
 
+        [Required]
         [Column("CATEGORIA")]
         public CategoriaAnimal? CategoriaAnimal { get; set; }
 
+        [Required]
         [Column("GENERO")]
         public Genero? Genero { get; set; }
 
+        [Required]
+        [Column("SITUACAO")]
+        public SituacaoAnimal? SituacaoAnimal { get; set; }
+
         #endregion enumModel
+
+        [Column("USUARIO_INCLUSAO")]
+        public String? UsuarioInclusao { get; set; }
+
+        [Column("DATA_INCLUSAO")]
+        public DateTimeOffset DataInclusao { get; set; }
+
+        [Column("USUARIO_ALTERACAO")]
+        public String? UsuarioAlteracao { get; set; }
+
+        [Column("DATA_ALTERACAO")]
+        public DateTimeOffset DataAlteracao { get; set; }
     }
 }

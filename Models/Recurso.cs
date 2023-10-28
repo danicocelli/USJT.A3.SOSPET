@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace PROJETO.A3.USJT.Models
 {
     [Table("CAD_RECURSO")]
-    public class Recurso
+    public class Recurso : IUserDateLog
     {
         [Key]
         [Column("ID_RECURSO")]
@@ -18,8 +18,22 @@ namespace PROJETO.A3.USJT.Models
         [Column("CATEGORIA_RECURSO")]
         public CategoriaRecurso Categoria { get; set; }
 
+        [Column("SITUACAO_RECURSO")]
+        public SituacaoRecurso Situacao { get; set; }
+
+        [Required]
+        [Column("DATA_RECEBIMENTO")]
+        public DateTimeOffset DataRecebimento { get; set; }
+
         [Column("DESCRICAO")]
         public String? Descricao { get; set; }
+
+        [Required]
+        [Column("ID_VOLUNTARIO")]
+        public String VoluntarioId { get; set; }
+
+        [ForeignKey("VoluntarioId")]
+        public Voluntario Voluntario { get; set; }
 
         [Column("USUARIO_INCLUSAO")]
         public String? UsuarioInclusao { get; set; }

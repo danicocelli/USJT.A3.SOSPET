@@ -24,6 +24,20 @@ namespace PROJETO.A3.USJT.Models
 
         public List<String>? Datas15DaysChart { get; set; }
         #endregion 15 Days Chart
+
+
+        #region Recurso Chart
+        public List<Int32>? Zerados { get; set; }
+
+        public List<Int32>? Criticos { get; set; }
+
+        public List<Int32>? Baixos { get; set; }
+
+        public List<Int32>? Oks { get; set; }
+
+        public List<Int32>? Completos { get; set; }
+
+        #endregion RecursoChart
     }
 
 }

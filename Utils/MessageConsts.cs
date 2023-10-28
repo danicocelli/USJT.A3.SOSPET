@@ -1,4 +1,4 @@
-﻿namespace PROJETO.A3.USJT.Models
+﻿namespace PROJETO.A3.USJT.Utils
 {
     public static class MessageConsts
     {

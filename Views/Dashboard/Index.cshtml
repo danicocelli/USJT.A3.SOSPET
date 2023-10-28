@@ -1,11 +1,12 @@
 ﻿@model PROJETO.A3.USJT.Models.Dashboard
+@using PROJETO.A3.USJT.Models.Enums
 
 @{
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/_LayoutPortal.cshtml";
 }
 
-<div class="container">
+<div class="container" >
     <div class="row mt-4">
         <div class="col-sm-12">
             <h3>Olá, Daniel Cardoso!</h3>
@@ -15,25 +16,35 @@
             <hr />
         </div>
     </div>
-    <div class="row mt-4">
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <b><i class="fa-solid fa-calendar"></i> Tem evento vindo aí, em!</b> O próximo ocorrerá em 01/08/2023. Fale com o responsável caso queira colaborar!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="row mt-4 mb-2">
         <h4>Menu Rápido</h4>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <a class="card shadow text-center dash-card" asp-controller="Animals" asp-action="Index" style="cursor: pointer; text-decoration: none;">
-                <h5 class="mb-3 mt-3" style="color: black">Animais</h5>
+                <h5 class="mb-3 mt-3" style="color: black"><i class="fa-solid fa-dog"></i> Animais</h5>
             </a>
         </div>
-        <div class="col-md-4">
-            <div class="card shadow text-center dash-card" style="cursor: pointer;">
-                <h5 class="mb-3 mt-3">Voluntários</h5>
-            </div>
+        <div class="col-md-3">
+            <a class="card shadow text-center dash-card" asp-controller="Voluntarios" asp-action="Index" style="cursor: pointer; text-decoration: none;">
+                <h5 class="mb-3 mt-3" style="color: black"><i class="fa-solid fa-people-group"></i> Voluntários</h5>
+            </a>
         </div>
-        <div class="col-md-4">
-            <div class="card shadow text-center dash-card" style="cursor: pointer;">
-                <h5 class="mb-3 mt-3">Eventos</h5>
-            </div>
+        <div class="col-md-3">
+            <a class="card shadow text-center dash-card" asp-controller="Eventos" asp-action="Index" style="cursor: pointer; text-decoration: none;">
+                <h5 class="mb-3 mt-3" style="color: black"><i class="fa-solid fa-calendar"></i> Eventos</h5>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a class="card shadow text-center dash-card" asp-controller="Recursos" asp-action="Index" style="cursor: pointer; text-decoration: none;">
+                <h5 class="mb-3 mt-3" style="color: black"><i class="fa-solid fa-pills"></i> Recursos</h5>
+            </a>
         </div>
     </div>
-    <div class="row mt-4">
+    <div class="row mt-4 mb-2">
+        <h4>Nossa causa em números</h4>
         <div class="col-sm-8">
             <div class="card shadow dash-card">
                 <div class="card-body">
@@ -45,22 +56,29 @@
         <div class="col-sm-4">
             <div class="card shadow dash-card">
                 <div class="card-body">
+                    <h6 class="text-center mt-1"><b>Você faz parte! </b>Já encontramos um lar para <b>@Model.PetsDoados</b> pets, e temos <b>@Model.PetsOng</b> pets disponíveis para doação!</h6>
+                </div>
+            </div>
+            <div class="card shadow mt-4 dash-card">
+                <div class="card-body">
                     <div id="chart-pie"></div>
                 </div>
             </div>
+            
         </div>
     </div>
-    <div class="row mt-4">
+    <div class="row mt-4 mb-5">
         <div class="col-sm-12">
             <div class="card shadow dash-card">
                 <div class="card-body">
-                    <div id="chart-area"></div>
+                    <div id="chart-recursos"></div>
                 </div>
             </div>
 
         </div>
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
     var doados = @System.Text.Json.JsonSerializer.Serialize(Model.Doados15DaysChart);
@@ -70,6 +88,12 @@
         string jsonArray = $"JSON.parse('{json}')";
     }
     var datas = @Html.Raw(jsonArray);
+
+    var zerados = @System.Text.Json.JsonSerializer.Serialize(Model.Zerados);
+    var baixos = @System.Text.Json.JsonSerializer.Serialize(Model.Baixos);
+    var criticos = @System.Text.Json.JsonSerializer.Serialize(Model.Criticos);
+    var oks = @System.Text.Json.JsonSerializer.Serialize(Model.Oks);
+    var completos = @System.Text.Json.JsonSerializer.Serialize(Model.Completos);
     console.log(datas);
 
     //grafico de barras
@@ -84,14 +108,14 @@
             data: acolhidos
         }],
         chart: {
-            height: 350,
+            height: 360,
             type: 'line',
         },
         stroke: {
             width: [0, 4]
         },
         title: {
-            text: 'Correlação de Animais Acolhidos e Doados'
+            text: 'Correlação de Animais Acolhidos e Doados nos últimos 15 dias'
         },
         dataLabels: {
             enabled: true,
@@ -105,6 +129,8 @@
             title: {
                 text: 'Doados',
             },
+            decimalsInFloat: 0,
+            tickAmount: 1,
 
         }, {
             opposite: true,
@@ -125,7 +151,7 @@
     var options = {
         series: [@Model.CachorrosContagem, @Model.GatosContagem],
         chart: {
-            width: 380,
+            width: 365,
             type: 'pie',
         },
         title: {
@@ -151,43 +177,72 @@
 
     var options = {
         series: [{
-            name: "STOCK ABC",
-            data: series.monthDataSeries1.prices
+            name: 'Zerado',
+            data: zerados
+        }, {
+            name: 'Crítico',
+            data: criticos
+        }, {
+            name: 'Baixo',
+            data: baixos
+        }, {
+            name: 'OK',
+            data: oks
+        }, {
+            name: 'Completo',
+            data: completos
         }],
         chart: {
-            type: 'area',
+            type: 'bar',
             height: 350,
-            zoom: {
-                enabled: false
-            }
+            stacked: true,
         },
-        dataLabels: {
-            enabled: false
+        plotOptions: {
+            bar: {
+                horizontal: true,
+                dataLabels: {
+                    total: {
+                        enabled: true,
+                        offsetX: 0,
+                        style: {
+                            fontSize: '13px',
+                            fontWeight: 900
+                        }
+                    }
+                }
+            },
         },
+        colors: ['#ed4a4a', '#fc6900', '#fcb900', '#5297eb', '#51bd56'],
         stroke: {
-            curve: 'straight'
+            width: 1,
+            colors: ['#fff']
         },
-
         title: {
-            text: 'Fundamental Analysis of Stocks',
-            align: 'left'
+            text: 'Quantidade de Recursos x Situação/Totalização'
         },
-        subtitle: {
-            text: 'Price Movements',
-            align: 'left'
-        },
-        labels: series.monthDataSeries1.dates,
         xaxis: {
-            type: 'datetime',
+            categories: ['Remédios', 'Vitaminas', 'Ração', 'Vestimentas', 'Vacinas', 'Outros']
+            
         },
         yaxis: {
-            opposite: true
+            title: {
+                text: undefined
+            },
+        },
+        tooltip: {
+            
+        },
+        fill: {
+            opacity: 1
         },
         legend: {
-            horizontalAlign: 'left'
+            position: 'top',
+            horizontalAlign: 'left',
+            offsetX: 40
         }
     };
 
-    var chart = new ApexCharts(document.querySelector("#chart-area"), options);
+    var chart = new ApexCharts(document.querySelector("#chart-recursos"), options);
     chart.render();
+
 </script>

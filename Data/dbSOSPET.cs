@@ -13,6 +13,8 @@ using PROJETO.A3.USJT.Models;
         }
 
         public DbSet<Animal> Animal { get; set; } = default!;
+       
+        public DbSet<Voluntario> Voluntario { get; set; } = default!;
 
         public DbSet<Evento> Evento { get; set; } = default!;
 

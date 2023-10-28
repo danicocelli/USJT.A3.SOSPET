@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PROJETO.A3.USJT.Models;
+using PROJETO.A3.USJT.Utils;
 
 namespace PROJETO.A3.USJT.Controllers
 {
@@ -28,9 +29,9 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Animals
         public async Task<IActionResult> Index()
         {
-              return _context.Animal != null ? 
-                          View(await _context.Animal.ToListAsync()) :
-                          Problem("Entity set 'dbSOSPET.Animal'  is null.");
+            return _context.Animal != null ?
+                        View(await _context.Animal.Include(a => a.Voluntario).ToListAsync()) :
+                        Problem("Entity set 'dbSOSPET.Animal'  is null.");
         }
 
         // GET: Animals/Details/5
@@ -53,17 +54,32 @@ namespace PROJETO.A3.USJT.Controllers
 
         // GET: Animals/Create
 
+
         public IActionResult Create()
         {
-            return View();
+            //var animals = _context.Animal.ToList();
+            var voluntarios = _context.Voluntario.ToList();
+
+
+            if (voluntarios != null)
+            {
+                ViewBag.Voluntarios = voluntarios;
+                return View();
+            }
+            else
+            {
+                return Problem("Entity set 'dbSOSPET.Animal' or 'dbSOSPET.Voluntario' is null.");
+            }
         }
+
+
 
         // POST: Animals/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AnimalId,NomeAnimal,DataNascimento,DataAcolhimento,Disponivel,Descricao,LocalEncontro,ObservacaoSaude,VoluntarioResponsavelId,Voluntario,Cor,DiretorioImagem,CategoriaAnimal,Genero")] Animal animal)
+        public async Task<IActionResult> Create([Bind("AnimalId,NomeAnimal,DataNascimento,DataAcolhimento,Disponivel,Doado,Descricao,LocalEncontro,ObservacaoSaude,VoluntarioResponsavelId,Voluntario,Cor,DiretorioImagem,CategoriaAnimal,Genero")] Animal animal)
         {
             //if (ModelState.IsValid)
 
@@ -82,10 +98,10 @@ namespace PROJETO.A3.USJT.Controllers
 
 
             _context.Add(animal);
-                await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
 
-           // }
+            // }
             //return View(animal);
         }
 
@@ -154,7 +170,7 @@ namespace PROJETO.A3.USJT.Controllers
             {
                 return NotFound();
             }
-            
+
             return View(animal);
         }
 
@@ -172,14 +188,14 @@ namespace PROJETO.A3.USJT.Controllers
             {
                 _context.Animal.Remove(animal);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AnimalExists(String id)
         {
-          return (_context.Animal?.Any(e => e.AnimalId == id)).GetValueOrDefault();
+            return (_context.Animal?.Any(e => e.AnimalId == id)).GetValueOrDefault();
         }
     }
 }

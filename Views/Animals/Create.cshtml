@@ -1,6 +1,8 @@
 ﻿@model PROJETO.A3.USJT.Models.Animal
 @using PROJETO.A3.USJT.Models.Enums
-
+@{
+    var voluntarios = ViewBag.Voluntarios as List<Voluntario>;
+}
 @{
     ViewData["Title"] = "Cadastro de Animais";
     Layout = "~/Views/Shared/_LayoutPortal.cshtml";
@@ -40,7 +42,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-2 mt-3">
+                    <div class="col-sm-3 mt-3">
                         <div class="form-group">
                             <div class="form-group">
                                 <label asp-for="CategoriaAnimal" class="control-label">Espécie</label>
@@ -54,7 +56,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-2 mt-3">
+                    <div class="col-sm-3 mt-3">
                         <div class="form-group">
                             <div class="form-group">
                                 <label asp-for="Genero" class="control-label">Gênero</label>
@@ -68,21 +70,24 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4 mt-3">
+                    <div class="col-sm-3 mt-3">
                         <div class="form-group">
                             <label asp-for="DiretorioImagem" class="control-label">Anexar Imagem do PET</label>
                             <input asp-for="DiretorioImagem" type="file" class="form-control" />
                             <span asp-validation-for="DiretorioImagem" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-sm-4 mt-3">
+                    <div class="col-sm-3 mt-3">
                         <div class="form-group">
-                            <label asp-for="Disponivel" class="control-label">Disponível para doação?</label>
-                            <br />
-                            <div style="margin-top:10px;">
-                                <input type="radio" asp-for="Disponivel" value="S" /> Sim
-                                <input type="radio" asp-for="Disponivel" value="N" /> Não
-                                <span asp-validation-for="Disponivel" class="text-danger"></span>
+                            <div class="form-group">
+                                <label asp-for="SituacaoAnimal" class="control-label">Situação do PET</label>
+                                <select asp-for="SituacaoAnimal" class="form-control">
+                                    @foreach (var value in Enum.GetValues(typeof(SituacaoAnimal)))
+                                    {
+                                        <option value="@value">@value</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="SituacaoAnimal" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -97,18 +102,30 @@
                             <span asp-validation-for="LocalEncontro" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-2">
                         <div class="form-group">
                             <label asp-for="DataAcolhimento" class="control-label">Data de Acolhimento</label>
                             <input type="date" asp-for="DataAcolhimento" class="form-control" />
                             <span asp-validation-for="DataAcolhimento" class="text-danger"></span>
                         </div>
                     </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label asp-for="DataDoacao" class="control-label">Data de Doação</label>
+                            <input type="date" asp-for="DataDoacao" class="form-control" />
+                            <span asp-validation-for="DataDoacao" class="text-danger"></span>
+                        </div>
+                    </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label asp-for="VoluntarioResponsavelId" class="control-label">Voluntário Responsável</label>
-                            <input asp-for="VoluntarioResponsavelId" class="form-control" />
-                            <span asp-validation-for="VoluntarioResponsavelId" class="text-danger"></span>
+                            <label asp-for="Voluntario" class="control-label">Voluntário</label>
+                            <select asp-for="Voluntario" class="form-control">
+                                @foreach (var value in voluntarios)
+                                {
+                                    <option value="@value.VoluntarioId">@value.Nome @value.Sobrenome</option>
+                                }
+                            </select>
+                            <span asp-validation-for="VoluntarioId" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -132,7 +149,7 @@
                     <div class="col-sm-12 mt-3">
                         <div class="form-group">
                             <a asp-action="Index" class="btn btn-secondary">Voltar para lista</a>
-                            <input type="submit" value="Cadastrar" class="btn btn-success" />
+                            <input type="submit" value="Salvar" class="btn btn-success" />
                             @*<div>
                                 <a asp-action="Index" class=" btn btn-secondary">Voltar para Lista</a>
                                 <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model?.AnimalId">Editar</a>

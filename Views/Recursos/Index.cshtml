@@ -1,72 +1,78 @@
 ﻿@model IEnumerable<PROJETO.A3.USJT.Models.Recurso>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Recursos e Insumos";
     Layout = "~/Views/Shared/_LayoutPortal.cshtml";
 }
+<div class="container">
+    <h3>Recursos e Insumos</h3>
 
-<h1>Index</h1>
+    <div class="card mt-4 shadow-sm rounded">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h5 style="margin-top: 10px">Cadastrados na Plataforma</h5>
+                </div>
+                <div class="col-sm-6 text-end">
+                    <a asp-controller="Dashboard" asp-action="Index" class="btn btn-primary mt-1 mb-1"><i class="fa-solid fa-house"></i> Dashboard</a>
+                    <a asp-action="Create" class="btn btn-success mt-1 mb-1"><i class="fa-solid fa-circle-plus"></i> Novo Recurso/Insumo</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="display" id="tableAnimais">
+                <thead>
+                    <tr>
+                        <th>
+                            Recurso/Insumo
+                        </th>
+                        <th>
+                            Descrição
+                        </th>
+                        <th>
+                            Categoria
+                        </th>
+                        <th>
+                            Situação
+                        </th>
+                        <th>
+                            Recebido em
+                        </th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NomeRecurso)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Descricao)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Categoria)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Situacao)
+                            </td>
+                            <td>
+                                @item.DataRecebimento.ToString("dd/MM/yyyy")
+                            </td>
+                            <td style="width:70px">
+                                <a asp-action="Edit" asp-route-id="@item.RecursoId"> <i class="fa-solid fa-pen" style="color: dimgray"> </i></a>
+                                <a asp-action="Details" asp-route-id="@item.RecursoId"> <i class="fa-solid fa-book" style="color:  dimgray"> </i></a>
+                                <a asp-action="Delete" asp-route-id="@item.RecursoId"> <i class="fa-solid fa-trash" style="color:  dimgray"> </i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NomeRecurso)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsuarioInclusao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataInclusao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsuarioAlteracao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataAlteracao)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeRecurso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Categoria)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsuarioInclusao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataInclusao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsuarioAlteracao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataAlteracao)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.RecursoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.RecursoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.RecursoId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+
+

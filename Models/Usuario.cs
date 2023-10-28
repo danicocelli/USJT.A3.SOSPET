@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace PROJETO.A3.USJT.Models
 {
     [Table("SIS_USUARIO")]
-    public class Usuario
+    public class Usuario : IUserDateLog
     {
         [Key]
         [Column("ID_USUARIO")]
@@ -27,5 +27,17 @@ namespace PROJETO.A3.USJT.Models
 
         [IgnoreDataMember]
         public Voluntario Voluntario { get; set; }
+
+        [Column("USUARIO_INCLUSAO")]
+        public String? UsuarioInclusao { get; set; }
+
+        [Column("DATA_INCLUSAO")]
+        public DateTimeOffset DataInclusao { get; set; }
+
+        [Column("USUARIO_ALTERACAO")]
+        public String? UsuarioAlteracao { get; set; }
+
+        [Column("DATA_ALTERACAO")]
+        public DateTimeOffset DataAlteracao { get; set; }
     }
 }

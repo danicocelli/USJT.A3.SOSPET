@@ -1,18 +1,21 @@
-﻿@model IEnumerable<PROJETO.A3.USJT.Models.Evento>
+﻿@model IEnumerable<PROJETO.A3.USJT.Models.Voluntario>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutPortal.cshtml";
 }
 
+
+
+
 <div class="container">
-    <h3>Eventos e Participações</h3>
+    <h3>Gestão de Voluntários</h3>
 
     <div class="card mt-4 shadow-sm rounded">
         <div class="card-header">
             <div class="row">
                 <div class="col-sm-6">
-                    <h5 style="margin-top: 10px">Cadastrados na Plataforma:</h5>
+                    <h5 style="margin-top: 10px">Cadastrados na Plataforma</h5>
                 </div>
                 <div class="col-sm-6 text-end">
                     <a asp-controller="Dashboard" asp-action="Index" class="btn btn-primary mt-1 mb-1"><i class="fa-solid fa-house"></i> Dashboard</a>
@@ -20,30 +23,30 @@
                 </div>
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table class="display" id="tableAnimais">
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.Titulo)
+                            @Html.DisplayNameFor(model => model.Nome)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.DescBreve)
+                            @Html.DisplayNameFor(model => model.Sobrenome)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.DataEvento)
+                            @Html.DisplayNameFor(model => model.Cargo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Telefone)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Descricao)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ImageDirectory)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.DataInclusao)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Endereco)
+                            @Html.DisplayNameFor(model => model.Situacao)
                         </th>
                         <th>Ações</th>
                     </tr>
@@ -53,30 +56,31 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Titulo)
+                                @Html.DisplayFor(modelItem => item.Nome)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.DescBreve)
+                                @Html.DisplayFor(modelItem => item.Sobrenome)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.DataEvento)
+                                @Html.DisplayFor(modelItem => item.Cargo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Telefone)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Descricao)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.ImageDirectory)
+                                @Html.DisplayFor(modelItem => item.Situacao)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DataInclusao)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Endereco)
-                            </td>
+
                             <td style="width:70px">
-                                <a asp-action="Edit" asp-route-id="@item.EventoId"> <i class="fa-solid fa-pen" style="color: dimgray"> </i></a>
-                                <a asp-action="Details" asp-route-id="@item.EventoId"> <i class="fa-solid fa-book" style="color:  dimgray"> </i></a>
-                                <a asp-action="Delete" asp-route-id="@item.EventoId"> <i class="fa-solid fa-trash" style="color:  dimgray"> </i></a>
+                                <a asp-action="Edit" asp-route-id="@item.VoluntarioId"> <i class="fa-solid fa-pen" style="color: dimgray"> </i></a>
+                                <a asp-action="Details" asp-route-id="@item.VoluntarioId"> <i class="fa-solid fa-book" style="color:  dimgray"> </i></a>
+                                <a asp-action="Delete" asp-route-id="@item.VoluntarioId"> <i class="fa-solid fa-trash" style="color:  dimgray"> </i></a>
                             </td>
                         </tr>
                     }
@@ -85,6 +89,7 @@
         </div>
     </div>
 </div>
+
 
 
 
