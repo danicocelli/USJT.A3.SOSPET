@@ -17,28 +17,28 @@
         </div>
     </div>
     <div class="alert alert-info alert-dismissible fade show" role="alert">
-        <b><i class="fa-solid fa-calendar"></i> Tem evento vindo aí, em!</b> O próximo ocorrerá em 01/08/2023. Fale com o responsável caso queira colaborar!
+        <b><i class="fa-solid fa-calendar"></i> Tem evento vindo aí, hein!</b> O próximo ocorrerá em 01/08/2023. Fale com o responsável caso queira colaborar!
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="row mt-4 mb-2">
         <h4>Menu Rápido</h4>
         <div class="col-md-3">
-            <a class="card shadow text-center dash-card" asp-controller="Animals" asp-action="Index" style="cursor: pointer; text-decoration: none;">
+            <a class="card shadow-sm text-center dash-card" asp-controller="Animals" asp-action="Index" style="cursor: pointer; text-decoration: none;">
                 <h5 class="mb-3 mt-3" style="color: black"><i class="fa-solid fa-dog"></i> Animais</h5>
             </a>
         </div>
         <div class="col-md-3">
-            <a class="card shadow text-center dash-card" asp-controller="Voluntarios" asp-action="Index" style="cursor: pointer; text-decoration: none;">
+            <a class="card shadow-sm text-center dash-card" asp-controller="Voluntarios" asp-action="Index" style="cursor: pointer; text-decoration: none;">
                 <h5 class="mb-3 mt-3" style="color: black"><i class="fa-solid fa-people-group"></i> Voluntários</h5>
             </a>
         </div>
         <div class="col-md-3">
-            <a class="card shadow text-center dash-card" asp-controller="Eventos" asp-action="Index" style="cursor: pointer; text-decoration: none;">
+            <a class="card shadow-sm text-center dash-card" asp-controller="Eventos" asp-action="Index" style="cursor: pointer; text-decoration: none;">
                 <h5 class="mb-3 mt-3" style="color: black"><i class="fa-solid fa-calendar"></i> Eventos</h5>
             </a>
         </div>
         <div class="col-md-3">
-            <a class="card shadow text-center dash-card" asp-controller="Recursos" asp-action="Index" style="cursor: pointer; text-decoration: none;">
+            <a class="card shadow-sm text-center dash-card" asp-controller="Recursos" asp-action="Index" style="cursor: pointer; text-decoration: none;">
                 <h5 class="mb-3 mt-3" style="color: black"><i class="fa-solid fa-pills"></i> Recursos</h5>
             </a>
         </div>
@@ -46,7 +46,7 @@
     <div class="row mt-4 mb-2">
         <h4>Nossa causa em números</h4>
         <div class="col-sm-8">
-            <div class="card shadow dash-card">
+            <div class="card shadow-sm dash-card">
                 <div class="card-body">
                     <div id="chart-bars"></div>
                 </div>
@@ -54,12 +54,12 @@
 
         </div>
         <div class="col-sm-4">
-            <div class="card shadow dash-card">
+            <div class="card shadow-sm dash-card">
                 <div class="card-body">
                     <h6 class="text-center mt-1"><b>Você faz parte! </b>Já encontramos um lar para <b>@Model.PetsDoados</b> pets, e temos <b>@Model.PetsOng</b> pets disponíveis para doação!</h6>
                 </div>
             </div>
-            <div class="card shadow mt-4 dash-card">
+            <div class="card shadow-sm mt-4 dash-card">
                 <div class="card-body">
                     <div id="chart-pie"></div>
                 </div>
@@ -67,15 +67,92 @@
             
         </div>
     </div>
-    <div class="row mt-4 mb-5">
-        <div class="col-sm-12">
-            <div class="card shadow dash-card">
+    <div class="row mt-4">
+        <div class="col-sm-4">
+            <div class="card shadow-sm dash-card">
                 <div class="card-body">
-                    <div id="chart-recursos"></div>
+                    <div class="mt-3"id="chart-volunteers"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card shadow-sm dash-card">
+                <div class="card-body">
+                    <ol class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Voluntários</div>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">+3 neste mês</span>
+                        </li>
+                         <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Pets Acolhidos</div>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">+5 esta semana</span>
+                        </li>
+                         <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Pets Doados</div>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">+12 essa semana</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Recurso</div>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">+1 neste mês</span>
+                        </li>
+                    </ol>
                 </div>
             </div>
 
         </div>
+        <div class="col-sm-4">
+            <div class="card shadow-sm dash-card">
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action active" aria-current="true" style="border-radius:15px">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">Doa PET Santana</h6>
+                                <small>daqui 1 dia</small>
+                            </div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">Doação Center Norte</h6>
+                                <small class="text-muted">daqui 8 dias</small>
+                            </div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">Anclipev Doação</h6>
+                                <small class="text-muted">daqui 15 dias</small>
+                            </div>
+                        </a>
+                        <a href="#" class="mt-3">
+                            <div class="text-center justify-content-between">
+                                <h6 class="mb-1">Visualizar todos os eventos <i class="fa-solid fa-arrow-right"></i></h6>
+                                
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row mt-4 mb-5">
+        <div class="col-sm-12">
+            <div class="card shadow-sm dash-card">
+                <div class="card-body">
+                    <div id="chart-recursos"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <h6>Por hoje é isso, voluntário! <i class="fa-regular fa-face-smile-wink"></i></h6> <h6> Você chegou ao fim. Deseja <a href="#">voltar ao topo</a>?</h6>
     </div>
 </div>
 
@@ -243,6 +320,69 @@
     };
 
     var chart = new ApexCharts(document.querySelector("#chart-recursos"), options);
+    chart.render();
+
+
+    var options = {
+        series: [76],
+        chart: {
+            type: 'radialBar',
+            offsetY: -20,
+            sparkline: {
+                enabled: true
+            }
+        },
+        title: {
+            text: 'Efetivo da ONG em Atividade'
+        },
+        plotOptions: {
+            radialBar: {
+                startAngle: -90,
+                endAngle: 90,
+                track: {
+                    background: "#e7e7e7",
+                    strokeWidth: '97%',
+                    margin: 5, // margin is in pixels
+                    dropShadow: {
+                        enabled: true,
+                        top: 2,
+                        left: 0,
+                        color: '#999',
+                        opacity: 1,
+                        blur: 2
+                    }
+                },
+                dataLabels: {
+                    name: {
+                        show: false
+                    },
+                    value: {
+                        offsetY: -2,
+                        fontSize: '22px'
+                    }
+                }
+            }
+        },
+        grid: {
+            padding: {
+                top: -10
+            }
+        },
+        fill: {
+            type: 'gradient',
+            gradient: {
+                shade: 'light',
+                shadeIntensity: 0,
+                inverseColors: false,
+                opacityFrom: 1,
+                opacityTo: 1,
+                stops: [0, 50, 53, 91]
+            },
+        },
+        labels: ['Average Results'],
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart-volunteers"), options);
     chart.render();
 
 </script>

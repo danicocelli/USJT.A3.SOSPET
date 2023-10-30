@@ -21,4 +21,6 @@ using PROJETO.A3.USJT.Models;
         public DbSet<Recurso> Recurso { get; set; } = default!;
 
         public DbSet<Dashboard> Dashboard { get; set; } = default!;
+
+        public DbSet<PROJETO.A3.USJT.Models.Usuario> Usuario { get; set; } = default!;
     }

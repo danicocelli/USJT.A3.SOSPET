@@ -1,0 +1,70 @@
+﻿@model PROJETO.A3.USJT.Models.Usuario
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutPortal.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Usuario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="UsuarioId" />
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Senha" class="control-label"></label>
+                <input asp-for="Senha" class="form-control" />
+                <span asp-validation-for="Senha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ativo" class="control-label"></label>
+                <input asp-for="Ativo" class="form-control" />
+                <span asp-validation-for="Ativo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VoluntarioId" class="control-label"></label>
+                <select asp-for="VoluntarioId" class="form-control" asp-items="ViewBag.VoluntarioId"></select>
+                <span asp-validation-for="VoluntarioId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsuarioInclusao" class="control-label"></label>
+                <input asp-for="UsuarioInclusao" class="form-control" />
+                <span asp-validation-for="UsuarioInclusao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataInclusao" class="control-label"></label>
+                <input asp-for="DataInclusao" class="form-control" />
+                <span asp-validation-for="DataInclusao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsuarioAlteracao" class="control-label"></label>
+                <input asp-for="UsuarioAlteracao" class="form-control" />
+                <span asp-validation-for="UsuarioAlteracao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataAlteracao" class="control-label"></label>
+                <input asp-for="DataAlteracao" class="form-control" />
+                <span asp-validation-for="DataAlteracao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

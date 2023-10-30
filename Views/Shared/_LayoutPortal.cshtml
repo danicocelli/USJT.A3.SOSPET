@@ -17,7 +17,7 @@
 </head>
 <body class="font-site">
     <header>
-        <nav class="navbar navbar-light shadow-sm mb-3">
+        <nav class="navbar navbar-light shadow-sm mb-3 fixed-top bg-white">
             <div class="container-fluid">
                 <a class="navbar-brand"><img src="~/imgs/logo-app.png" alt="SOS PET" width="100" height="50"> </a>
                 <h5>Portal do Voluntário</h5>
@@ -50,7 +50,7 @@
                                 <a class="nav-link" aria-current="page" asp-controller="Voluntarios" asp-action="Index"><i class="fa-solid fa-people-group menu-a-icon"></i> Voluntários</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" asp-controller="Voluntarios" asp-action="Index"><i class="fa-solid fa-users-gear menu-a-icon"></i> Usuários</a>
+                                <a class="nav-link" aria-current="page" asp-controller="Usuarios" asp-action="Index"><i class="fa-solid fa-users-gear menu-a-icon"></i> Usuários</a>
                             </li>
                         </ul>
                         <div class="card mt-5">
@@ -60,7 +60,8 @@
                                        Minha Conta
                                    </div>
                                    <div class="col-sm-6 text-end">
-                                        <i class="fa-solid fa-gear"></i>
+                                        <a asp-controller="Usuarios" asp-action="Index"><i class="fa-solid fa-gear text-muted"></i></a>
+                                       
                                    </div>
                                </div>
                             </div>
@@ -84,11 +85,11 @@
         </nav>
     </header>
 
-    <main role="main" class="pb-3 mt-4">
+    <main role="main" class="pb-3" style="margin-top:95px">
         @RenderBody()
     </main>
 
-    <footer class="border-top footer fixed-bottom text-muted shadow" style="background-color:#f5f3f2">
+    <footer class="border-top footer text-muted shadow" style="background-color:#f5f3f2">
         <div class="container mt-2 mb-2">
             &copy; 2023 - SOS PETS - Portal do Voluntário <a asp-area="" asp-controller="Home" asp-action="Privacy"></a>
         </div>
