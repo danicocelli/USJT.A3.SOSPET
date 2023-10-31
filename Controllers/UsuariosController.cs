@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PROJETO.A3.USJT.Models;
+using PROJETO.A3.USJT.Utils;
 
 namespace PROJETO.A3.USJT.Controllers
 {
@@ -21,13 +22,58 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Usuarios
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View("Login");
             var dbSOSPET = _context.Usuario.Include(u => u.Voluntario);
             return View(await dbSOSPET.ToListAsync());
+        }
+
+        // GET: Usuarios
+        public async Task<IActionResult> Login()
+        {
+            return View("Login");
+        }
+
+
+        public async Task<IActionResult> Logout()
+        {
+            HttpContext.Session.Remove("IsLoggedIn");
+
+            return View("Login");
+        }
+
+        public IActionResult Authenticate(string username, string senha)
+        {
+            if (IsValidUser(username, senha))
+            {
+                // If the credentials are valid, create a user session.
+
+                HttpContext.Session.SetString("IsLoggedIn", "true");
+                return Redirect("/Dashboard/Index");
+            }
+            else
+            {
+                // Display an error message or redirect to a login error page.
+                ViewData["IncorrectLogin"] = "Usuário ou senha inválidos.";
+                return View("Login");
+            }
+        }
+
+
+        private bool IsValidUser(string username, string senha)
+        {
+            var hasValue = _context.Usuario
+                .Where(x => x.Username == username && x.Senha == senha)
+                .Any();
+
+            if (hasValue == true) return true;
+            else return false;
         }
 
         // GET: Usuarios/Details/5
         public async Task<IActionResult> Details(string id)
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View("Login");
+            
             if (id == null || _context.Usuario == null)
             {
                 return NotFound();
@@ -47,6 +93,7 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Usuarios/Create
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View("Login");
             ViewData["VoluntarioId"] = new SelectList(_context.Voluntario, "VoluntarioId", "VoluntarioId");
             return View();
         }
@@ -71,6 +118,8 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Usuarios/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View("Login");
+
             if (id == null || _context.Usuario == null)
             {
                 return NotFound();
@@ -124,6 +173,7 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Usuarios/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View("Login");
             if (id == null || _context.Usuario == null)
             {
                 return NotFound();
@@ -163,5 +213,7 @@ namespace PROJETO.A3.USJT.Controllers
         {
           return (_context.Usuario?.Any(e => e.UsuarioId == id)).GetValueOrDefault();
         }
+
+
     }
 }

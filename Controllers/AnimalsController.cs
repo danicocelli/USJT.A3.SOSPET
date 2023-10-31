@@ -29,6 +29,8 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Animals
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
+
             return _context.Animal != null ?
                         View(await _context.Animal.Include(a => a.Voluntario).ToListAsync()) :
                         Problem("Entity set 'dbSOSPET.Animal'  is null.");
@@ -37,6 +39,8 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Animals/Details/5
         public async Task<IActionResult> Details(String id)
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
+
             if (id == null || _context.Animal == null)
             {
                 return NotFound();
@@ -58,6 +62,8 @@ namespace PROJETO.A3.USJT.Controllers
         public IActionResult Create()
         {
             //var animals = _context.Animal.ToList();
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
+
             var voluntarios = _context.Voluntario.ToList();
 
 
@@ -92,6 +98,7 @@ namespace PROJETO.A3.USJT.Controllers
                 animal.DiretorioImagem = "/uploads/" + uniqueFileName;
             }
 
+            
 
             TempData[TempDataConsts.InsertSuccess] = MessageConsts.CreateSuccessMessage;
 
@@ -108,6 +115,8 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Animals/Edit/5
         public async Task<IActionResult> Edit(String id)
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
+
             if (id == null || _context.Animal == null)
             {
                 return NotFound();
@@ -159,6 +168,8 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Animals/Delete/5
         public async Task<IActionResult> Delete(String id)
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
+
             if (id == null || _context.Animal == null)
             {
                 return NotFound();

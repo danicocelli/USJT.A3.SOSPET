@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration.UserSecrets;
 using NuGet.Protocol.Core.Types;
 using PROJETO.A3.USJT.Models;
 using PROJETO.A3.USJT.Models.Enums;
-
+using PROJETO.A3.USJT.Utils;
 
 namespace PROJETO.A3.USJT.Controllers
 {
@@ -23,11 +23,14 @@ namespace PROJETO.A3.USJT.Controllers
         public DashboardController(dbSOSPET context)
         {
             _context = context;
+             
         }
 
         // GET: Dashboard
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
+
             var animais = _context.Animal.ToList();
 
             var counterQuery = LoadChartCounterDashboard(animais);

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PROJETO.A3.USJT.Models;
+using PROJETO.A3.USJT.Utils;
 
 namespace PROJETO.A3.USJT.Controllers
 {
@@ -29,6 +30,8 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Eventos/Details/5
         public async Task<IActionResult> Details(string id)
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
+
             if (id == null || _context.Evento == null)
             {
                 return NotFound();
@@ -69,6 +72,8 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Eventos/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
+
             if (id == null || _context.Evento == null)
             {
                 return NotFound();
@@ -120,6 +125,8 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Eventos/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
+
             if (id == null || _context.Evento == null)
             {
                 return NotFound();

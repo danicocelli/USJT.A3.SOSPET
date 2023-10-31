@@ -19,7 +19,10 @@ namespace PROJETO.A3.USJT
             builder.Services.AddRazorPages()
                             .AddRazorRuntimeCompilation();
 
-
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(20); // Set the session timeout as needed.
+            });
 
             var app = builder.Build();
 
@@ -38,7 +41,10 @@ namespace PROJETO.A3.USJT
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
+            app.UseSession();
+
             app.Run();
+        
         }
     }
 }

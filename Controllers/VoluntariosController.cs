@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PROJETO.A3.USJT.Models;
+using PROJETO.A3.USJT.Utils;
 
 namespace PROJETO.A3.USJT.Controllers
 {
@@ -21,7 +22,8 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Voluntarios
         public async Task<IActionResult> Index()
         {
-              return _context.Voluntario != null ? 
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
+            return _context.Voluntario != null ? 
                           View(await _context.Voluntario.ToListAsync()) :
                           Problem("Entity set 'dbSOSPET.Voluntario'  is null.");
         }
@@ -29,6 +31,7 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Voluntarios/Details/5
         public async Task<IActionResult> Details(string id)
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
             if (id == null || _context.Voluntario == null)
             {
                 return NotFound();
@@ -47,6 +50,7 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Voluntarios/Create
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
             return View();
         }
 
@@ -69,6 +73,7 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Voluntarios/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
             if (id == null || _context.Voluntario == null)
             {
                 return NotFound();
@@ -120,6 +125,7 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Voluntarios/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
             if (id == null || _context.Voluntario == null)
             {
                 return NotFound();

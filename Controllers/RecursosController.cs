@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PROJETO.A3.USJT.Models;
+using PROJETO.A3.USJT.Utils;
 
 namespace PROJETO.A3.USJT.Controllers
 {
@@ -21,7 +22,8 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Recursos
         public async Task<IActionResult> Index()
         {
-              return _context.Recurso != null ? 
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
+            return _context.Recurso != null ? 
                           View(await _context.Recurso.ToListAsync()) :
                           Problem("Entity set 'dbSOSPET.Recurso'  is null.");
         }
@@ -29,6 +31,8 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Recursos/Details/5
         public async Task<IActionResult> Details(string id)
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
+
             if (id == null || _context.Recurso == null)
             {
                 return NotFound();
@@ -69,6 +73,8 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Recursos/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
+
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
             if (id == null || _context.Recurso == null)
             {
                 return NotFound();
@@ -120,6 +126,7 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Recursos/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
+            if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
             if (id == null || _context.Recurso == null)
             {
                 return NotFound();
