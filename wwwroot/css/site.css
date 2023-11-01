@@ -288,3 +288,30 @@ html {
     margin-right: 10px;
 }
 
+.card-user-data {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    bottom: 0;
+    width: 93%;
+    margin-bottom: 12px;
+}
+
+.portal-footer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    bottom: 0;
+    width: 100%;
+}

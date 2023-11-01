@@ -38,6 +38,27 @@ namespace PROJETO.A3.USJT.Models
         public List<Int32>? Completos { get; set; }
 
         #endregion RecursoChart
+
+        #region Quantidade Efetivo Ong
+
+        public int EfetivoOng { get; set; }
+
+        #endregion Quantidade Efetivo Ong
+
+        #region Contadores Novos
+        public int NovosVoluntarios { get; set; }
+
+        public int NovosPetsA { get; set; }
+        
+        public int NovosPetsD { get; set; }
+
+        public int NovosRecursos { get; set; }
+
+        #endregion Contadores Novos
+
+        #region Eventos 
+        public List<Evento> ProximosEventos { get; set; }
+        #endregion Eventos
     }
 
 }

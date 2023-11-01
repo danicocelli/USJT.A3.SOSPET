@@ -10,6 +10,7 @@ using NuGet.Protocol.Core.Types;
 using PROJETO.A3.USJT.Models;
 using PROJETO.A3.USJT.Models.Enums;
 using PROJETO.A3.USJT.Utils;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PROJETO.A3.USJT.Controllers
 {
@@ -23,7 +24,7 @@ namespace PROJETO.A3.USJT.Controllers
         public DashboardController(dbSOSPET context)
         {
             _context = context;
-             
+
         }
 
         // GET: Dashboard
@@ -36,6 +37,9 @@ namespace PROJETO.A3.USJT.Controllers
             var counterQuery = LoadChartCounterDashboard(animais);
             var chart15DaysQuery = LoadChart15Days();
             var recurso = LoadRecursosChart();
+            var efetivoOng = LoadChartEfetivoOng();
+            var novosDados = LoadNovoPeriodo();
+            var eventos = LodEventos();
             var dashboardData = new Dashboard()
             {
                 PetsOng = counterQuery.PetsOng,
@@ -49,9 +53,16 @@ namespace PROJETO.A3.USJT.Controllers
                 Criticos = recurso.Criticos,
                 Baixos = recurso.Baixos,
                 Oks = recurso.Oks,
-                Completos = recurso.Completos
-            };
+                Completos = recurso.Completos,
+                EfetivoOng = efetivoOng.EfetivoOng,
+                NovosRecursos = novosDados.NovosRecursos,
+                NovosPetsA = novosDados.NovosPetsA,
+                NovosPetsD = novosDados.NovosPetsD,
+                NovosVoluntarios = novosDados.NovosVoluntarios,
+                ProximosEventos =eventos.ProximosEventos
                
+            };
+            ViewBag.ProximosEventos = dashboardData.ProximosEventos;
             return dashboardData != null ?
                          View(dashboardData) :
                          Problem("Não foi possível carregar a DashBoard");
@@ -73,7 +84,7 @@ namespace PROJETO.A3.USJT.Controllers
         {
             var categorias = Enum.GetValues(typeof(CategoriaRecurso)).Cast<CategoriaRecurso>();
             var recursos = _context.Recurso.ToList();
-            
+
             var contagemPorZerado = recursos
                 .Where(x => x.Situacao == SituacaoRecurso.Zerado)
                 .GroupBy(x => x.Categoria)
@@ -113,8 +124,8 @@ namespace PROJETO.A3.USJT.Controllers
                 Oks = categorias.Select(categoria => contagemPorOk.ContainsKey(categoria) ? contagemPorOk[categoria] : 0).ToList(),
                 Completos = categorias.Select(categoria => contagemPorCompleto.ContainsKey(categoria) ? contagemPorCompleto[categoria] : 0).ToList()
             };
-            
-            return dash;                  
+
+            return dash;
         }
 
         private Dashboard LoadChart15Days()
@@ -175,10 +186,58 @@ namespace PROJETO.A3.USJT.Controllers
                 Doados15DaysChart = countDoadosPerDay,
                 Datas15DaysChart = last15Days
             };
-            
+
             return dash;
+        }
+        
+        private Dashboard LoadChartEfetivoOng()
+        {
+           var efetivoOng = _context.Voluntario.ToList();
+
+           decimal total = efetivoOng.Count();
+           decimal ativos = efetivoOng.Where(x => SituacaoVoluntario.Ativo.Equals(x.Situacao)).Count();
+
+
+            var percentOng = (ativos / total) * 100;
+
+            var dash = new Dashboard()
+            {
+                EfetivoOng = (int)percentOng
+            };
+            return dash;
+        }
+
+        private Dashboard LoadNovoPeriodo()
+        {
+            var novosVoluntarios = _context.Voluntario.Where(x => x.DataInclusao >= DateTime.Now.AddMonths(-1)).Count();
+            var novosAcolhidos = _context.Animal.Where(x => x.DataAcolhimento >= DateTime.Now.AddDays(-7)).Count();
+            var novosDoados = _context.Animal.Where(x => x.DataDoacao >= DateTime.Now.AddDays(-7)).Count();
+            var novosRecursos = _context.Recurso.Where(x => x.DataInclusao >= DateTime.Now.AddMonths(-1)).Count();
+
+            var dash = new Dashboard()
+            {
+                NovosVoluntarios = novosVoluntarios,
+                NovosPetsA = novosAcolhidos,
+                NovosPetsD = novosDoados,
+                NovosRecursos = novosRecursos
+            };
+            return dash;
+        }
+
+        private Dashboard LodEventos()
+        {
+            var eventos = _context.Evento.Where(x => x.DataEvento >= DateTime.Now).ToList();
+
+            var listEventos = new List<Evento>();
+
+            var dash = new Dashboard();
+            if(eventos != null) eventos.ForEach(x =>listEventos.Add(x));
+
+            dash.ProximosEventos = listEventos;
+            return dash;
+        }
+             
     }
-}
 
 }
 
