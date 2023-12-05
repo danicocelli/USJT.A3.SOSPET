@@ -5,57 +5,46 @@
     Layout = "~/Views/Shared/_LayoutPortal.cshtml";
 }
 
-<h1>Details</h1>
+<div class="container" style="margin-top: 50px">
+    <div>
+        <h4>Eventos e Participações</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                Título
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Titulo)
+            </dd>
+            <dt class="col-sm-2">
+                Subtítulo
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DescBreve)
+            </dd>
+            <dt class="col-sm-2">
+                Data do Evento
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DataEvento)
+            </dd>
+            <dt class="col-sm-2">
+               Descrição
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Descricao)
+            </dd>
+            <dt class="col-sm-2">
+                Endereço
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Endereco)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Index" class=" btn btn-secondary">Voltar para Lista</a>
+        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model?.EventoId">Editar</a>
+    </div>
+</div>
 
-<div>
-    <h4>Evento</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Titulo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Titulo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DescBreve)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DescBreve)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataEvento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataEvento)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageDirectory)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImageDirectory)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataInclusao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataInclusao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Endereco)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Endereco)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.EventoId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>

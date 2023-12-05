@@ -8,7 +8,6 @@
 
 <div class="container" style="margin-top: 50px">
     
-
     <div>
         <h4>Mais informações sobre @Html.DisplayFor(model => model.NomeAnimal)</h4>
         <hr />
@@ -36,7 +35,7 @@
                 Data de Doação
             </dt>
             <dd class="col-sm-10">
-                @(((System.DateTimeOffset)Model.DataDoacao != null) ? ((System.DateTimeOffset)Model.DataDoacao).ToString("dd/MM/yyyy") : "")
+                @((Model.DataDoacao.HasValue) ? ((System.DateTimeOffset)Model.DataDoacao).ToString("dd/MM/yyyy") : "-")
             </dd>
             <dt class="col-sm-2">
                 Disponível?
@@ -57,28 +56,16 @@
                 @Html.DisplayFor(model => model.LocalEncontro)
             </dd>
             <dt class="col-sm-2">
-                Observações de Saúde/Sanitárias
+                Observações de Saúde
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.ObservacaoSaude)
-            </dd>
-            <dt class="col-sm-2">
-                Voluntário Responsável
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Voluntario)
             </dd>
             <dt class="col-sm-2">
                 Cor
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.Cor)
-            </dd>
-            <dt class="col-sm-2">
-                Diretório de Imagem
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.DiretorioImagem)
             </dd>
             <dt class="col-sm-2">
                 Espécie

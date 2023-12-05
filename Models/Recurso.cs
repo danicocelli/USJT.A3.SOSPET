@@ -10,6 +10,8 @@ namespace PROJETO.A3.USJT.Models
     {
         [Key]
         [Column("ID_RECURSO")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required]
         public String? RecursoId { get; set; }
 
         [Column("NOME_RECURSO")]

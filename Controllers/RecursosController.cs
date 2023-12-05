@@ -23,7 +23,7 @@ namespace PROJETO.A3.USJT.Controllers
         public async Task<IActionResult> Index()
         {
             if (HttpContext.Session.GetString("IsLoggedIn") != "true") return View(SessionValidator.LoginUrl);
-            return _context.Recurso != null ? 
+            return _context.Recurso != null ?
                           View(await _context.Recurso.ToListAsync()) :
                           Problem("Entity set 'dbSOSPET.Recurso'  is null.");
         }
@@ -51,6 +51,8 @@ namespace PROJETO.A3.USJT.Controllers
         // GET: Recursos/Create
         public IActionResult Create()
         {
+            var voluntarios = _context.Voluntario.ToList();
+            ViewBag.Voluntarios = voluntarios;
             return View();
         }
 
@@ -59,14 +61,19 @@ namespace PROJETO.A3.USJT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RecursoId,NomeRecurso,Categoria,Descricao,UsuarioInclusao,DataInclusao,UsuarioAlteracao,DataAlteracao")] Recurso recurso)
+        public async Task<IActionResult> Create([Bind("RecursoId,NomeRecurso,Categoria,VoluntarioId,Voluntario,Descricao,DataRecebimento,Situacao")] Recurso recurso)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(recurso);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+            recurso.DataAlteracao = DateTimeOffset.Now;
+            recurso.UsuarioAlteracao = SessionValidator.UserData;
+            recurso.DataInclusao = DateTimeOffset.Now;
+            recurso.UsuarioInclusao = SessionValidator.UserData;
+
+
+            _context.Add(recurso);
+            await _context.SaveChangesAsync();
+            TempData[TempDataConsts.InsertSuccess] = MessageConsts.CreateSuccessMessage;
+            return RedirectToAction(nameof(Index));
+
             return View(recurso);
         }
 
@@ -156,14 +163,14 @@ namespace PROJETO.A3.USJT.Controllers
             {
                 _context.Recurso.Remove(recurso);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool RecursoExists(string id)
         {
-          return (_context.Recurso?.Any(e => e.RecursoId == id)).GetValueOrDefault();
+            return (_context.Recurso?.Any(e => e.RecursoId == id)).GetValueOrDefault();
         }
     }
 }

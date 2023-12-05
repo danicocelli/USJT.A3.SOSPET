@@ -85,22 +85,15 @@ namespace PROJETO.A3.USJT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AnimalId,NomeAnimal,DataNascimento,DataAcolhimento,Disponivel,Doado,Descricao,LocalEncontro,ObservacaoSaude,VoluntarioResponsavelId,Voluntario,Cor,DiretorioImagem,CategoriaAnimal,Genero")] Animal animal)
+        public async Task<IActionResult> Create([Bind("AnimalId,NomeAnimal,DataNascimento,DataAcolhimento,Disponivel,Doado,Descricao,LocalEncontro,ObservacaoSaude,VoluntarioId,Voluntario,Cor,SituacaoAnimal,CategoriaAnimal,Genero")] Animal animal)
         {
-            //if (ModelState.IsValid)
-
-            if (animal.DiretorioImagem != null)
-            {
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "uploads");
-                string uniqueFileName = Guid.NewGuid().ToString() + "_" + animal.DiretorioImagem;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                animal.DiretorioImagem = "/uploads/" + uniqueFileName;
-            }
-
-            
 
             TempData[TempDataConsts.InsertSuccess] = MessageConsts.CreateSuccessMessage;
+
+            animal.DataAlteracao = DateTimeOffset.Now;
+            animal.UsuarioAlteracao = SessionValidator.UserData;
+            animal.DataInclusao = DateTimeOffset.Now;
+            animal.UsuarioInclusao = SessionValidator.UserData;
 
 
 
@@ -108,8 +101,6 @@ namespace PROJETO.A3.USJT.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
 
-            // }
-            //return View(animal);
         }
 
         // GET: Animals/Edit/5
@@ -121,12 +112,17 @@ namespace PROJETO.A3.USJT.Controllers
             {
                 return NotFound();
             }
+            var voluntarios = _context.Voluntario.ToList();
+            ViewBag.Voluntarios = voluntarios;
 
             var animal = await _context.Animal.FindAsync(id);
+
             if (animal == null)
             {
                 return NotFound();
             }
+
+
             return View(animal);
         }
 
@@ -135,17 +131,27 @@ namespace PROJETO.A3.USJT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(String id, [Bind("AnimalId,NomeAnimal,DataNascimento,DataAcolhimento,Disponivel,Descricao,LocalEncontro,ObservacaoSaude,VoluntarioResponsavelId,Voluntario,Cor,DiretorioImagem,CategoriaAnimal,Genero")] Animal animal)
+        public async Task<IActionResult> Edit(String id, [Bind(("AnimalId,NomeAnimal,DataNascimento,DataAcolhimento,DataDoacao,Disponivel,Descricao,LocalEncontro,ObservacaoSaude,VoluntarioId,Cor,SituacaoAnimal,CategoriaAnimal,Genero"))] Animal animal)
         {
             if (id != animal.AnimalId)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            animal.DataAlteracao = DateTimeOffset.Now;
+            animal.UsuarioAlteracao = SessionValidator.UserData;
+
+            if (animal.DataInclusao == null || animal.DataAlteracao == null)
             {
+                animal.DataInclusao = DateTimeOffset.Now;
+                animal.UsuarioInclusao = SessionValidator.UserData;
+            }
+
+            //if (ModelState.IsValid)
+            //{
                 try
                 {
+                    
                     _context.Update(animal);
                     await _context.SaveChangesAsync();
                 }
@@ -161,7 +167,7 @@ namespace PROJETO.A3.USJT.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+            //}
             return View(animal);
         }
 

@@ -48,6 +48,7 @@ namespace PROJETO.A3.USJT.Controllers
                 // If the credentials are valid, create a user session.
 
                 HttpContext.Session.SetString("IsLoggedIn", "true");
+                SessionValidator.UserData = username;
                 return Redirect("/Dashboard/Index");
             }
             else

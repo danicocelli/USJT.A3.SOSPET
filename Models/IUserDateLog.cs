@@ -1,4 +1,6 @@
-﻿namespace PROJETO.A3.USJT.Models
+﻿using PROJETO.A3.USJT.Utils;
+
+namespace PROJETO.A3.USJT.Models
 {
     public interface IUserDateLog
     {
@@ -6,5 +8,7 @@
         DateTimeOffset DataInclusao { get; set; }
         String? UsuarioAlteracao { get; set; }
         DateTimeOffset DataAlteracao { get; set; }
+
     }
 }
+    

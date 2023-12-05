@@ -62,7 +62,7 @@
                                 @item.DataNascimento.ToString("dd/MM/yyyy")
                             </td>
                             <td>
-                                @item.DataAcolhimento.ToString("dd/MM/yyyy")
+                                @item.DataAcolhimento?.ToString("dd/MM/yyyy")
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.SituacaoAnimal)

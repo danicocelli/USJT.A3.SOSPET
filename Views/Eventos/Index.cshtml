@@ -31,13 +31,10 @@
                             Subtítulo
                         </th>
                         <th>
-                            Oocorrerá em
-                        </th>
-                        <th>
-                            Voluntário Responsável
-                        </th>
-                        <th>
                             Postado em
+                        </th>
+                        <th>
+                            Ocorrerá em
                         </th>
                         <th>Ações</th>
                     </tr>
@@ -53,13 +50,10 @@
                                 @Html.DisplayFor(modelItem => item.DescBreve)
                             </td>
                             <td>
-                                @item.DataEvento.ToString("dd/MM/yyyy")
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.VoluntarioId)
-                            </td>
-                            <td>
                                 @item.DataInclusao.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                @item.DataEvento.ToString("dd/MM/yyyy")
                             </td>
                             <td style="width:70px">
                                 <a asp-action="Edit" asp-route-id="@item.EventoId"> <i class="fa-solid fa-pen" style="color: dimgray"> </i></a>

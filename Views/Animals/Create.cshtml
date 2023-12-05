@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-3 mt-3">
+                    <div class="col-sm-4 mt-3">
                         <div class="form-group">
                             <div class="form-group">
                                 <label asp-for="CategoriaAnimal" class="control-label">Espécie</label>
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3 mt-3">
+                    <div class="col-sm-4 mt-3">
                         <div class="form-group">
                             <div class="form-group">
                                 <label asp-for="Genero" class="control-label">Gênero</label>
@@ -70,14 +70,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3 mt-3">
-                        <div class="form-group">
-                            <label asp-for="DiretorioImagem" class="control-label">Anexar Imagem do PET</label>
-                            <input asp-for="DiretorioImagem" type="file" class="form-control" />
-                            <span asp-validation-for="DiretorioImagem" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 mt-3">
+                    <div class="col-sm-4 mt-3">
                         <div class="form-group">
                             <div class="form-group">
                                 <label asp-for="SituacaoAnimal" class="control-label">Situação do PET</label>
@@ -119,7 +112,7 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label asp-for="Voluntario" class="control-label">Voluntário</label>
-                            <select asp-for="Voluntario" class="form-control">
+                            <select asp-for="VoluntarioId" class="form-control">
                                 @foreach (var value in voluntarios)
                                 {
                                     <option value="@value.VoluntarioId">@value.Nome @value.Sobrenome</option>
@@ -156,7 +149,6 @@
                             </div>*@
                         </div>
                     </div>
-               
                 </div>
             </form>
         </div>

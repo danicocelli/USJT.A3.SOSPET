@@ -20,16 +20,12 @@ namespace PROJETO.A3.USJT.Models
         public String? NomeAnimal { get; set; }
 
         [Required]
-        [Column("REGISTRO")]
-        public String? Registro { get; set; }
-
-        [Required]
         [Column("DATA_NASCIMENTO")]
         public DateTimeOffset DataNascimento { get; set; }
 
         [Required]
         [Column("DATA_ACOLHIMENTO")]
-        public DateTimeOffset DataAcolhimento { get; set; }
+        public DateTimeOffset? DataAcolhimento { get; set; }
 
         [Column("DATA_DOACAO")]
         public DateTimeOffset? DataDoacao { get; set; }
@@ -52,9 +48,6 @@ namespace PROJETO.A3.USJT.Models
 
         [Column("COR")]
         public String? Cor { get; set; }
-
-        [Column("DIR_IMAGEM")]
-        public String? DiretorioImagem { get; set; }
 
         #region enumModel
 
