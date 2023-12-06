@@ -71,10 +71,10 @@ namespace PROJETO.A3.USJT.Controllers
             return new Dashboard()
             {
                 //Contagem conforme condições
-                PetsOng = animais.Count(x => x.SituacaoAnimal != SituacaoAnimal.Adotado),
-                PetsDoados = animais.Count(x => x.SituacaoAnimal == SituacaoAnimal.Adotado),
-                CachorrosContagem = animais.Count(x => CategoriaAnimal.Cachorro.Equals(x.CategoriaAnimal)),
-                GatosContagem = animais.Count(x => CategoriaAnimal.Gato.Equals(x.CategoriaAnimal))
+                PetsOng = animais.Count(x => x.DataDoacao == null),
+                PetsDoados = animais.Count(x => x.DataDoacao != null),
+                CachorrosContagem = animais.Count(x => CategoriaAnimal.Cachorro.Equals(x.CategoriaAnimal) && x.DataDoacao == null),
+                GatosContagem = animais.Count(x => CategoriaAnimal.Gato.Equals(x.CategoriaAnimal) && x.DataDoacao == null)
             };
         }
 

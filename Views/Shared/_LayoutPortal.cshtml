@@ -1,5 +1,7 @@
-﻿@using PROJETO.A3.USJT.Utils;
-
+﻿@using PROJETO.A3.USJT.Utils
+@{
+  
+}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -50,9 +52,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="page" asp-controller="Voluntarios" asp-action="Index"><i class="fa-solid fa-people-group menu-a-icon"></i> Voluntários</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" asp-controller="Usuarios" asp-action="Index"><i class="fa-solid fa-users-gear menu-a-icon"></i> Usuários</a>
-                            </li>
                         </ul>
                         <div class="card card-user-data">
                             <div class="card-header text-muted bg-white">
@@ -61,7 +60,7 @@
                                        Minha Conta
                                    </div>
                                    <div class="col-sm-6 text-end">
-                                        <a asp-controller="Usuarios" asp-action="Index"><i class="fa-solid fa-gear text-muted"></i></a>
+                                        <a asp-controller="Usuarios" asp-action="Index"></a>
                                        
                                    </div>
                                </div>
@@ -69,7 +68,7 @@
                             <div class="card-body rounded container">
                                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                                     <li>
-                                        <p style="font-size: 14.45px" class="text-muted">Voluntário: Daniel Nicocelli<br />Cargo: Administrador</br>Usuário: daniel.cardoso</p>
+                                        <p style="font-size: 14.45px" class="text-muted">Usuário: @SessionValidator.UserData</p>
                                     </li>
 
                                     <li class="nav-item">
@@ -86,7 +85,7 @@
         </nav>
     </header>
 
-    <main role="main" class="pb-3" style="margin-top:95px">
+    <main role="main" class="pb-3" style="margin-top:95px; margin-bottom: 60px">
         @RenderBody()
     </main>
 

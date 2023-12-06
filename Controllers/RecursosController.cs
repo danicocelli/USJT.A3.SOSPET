@@ -87,6 +87,9 @@ namespace PROJETO.A3.USJT.Controllers
                 return NotFound();
             }
 
+            var voluntarios = _context.Voluntario.ToList();
+            ViewBag.Voluntarios = voluntarios;
+
             var recurso = await _context.Recurso.FindAsync(id);
             if (recurso == null)
             {

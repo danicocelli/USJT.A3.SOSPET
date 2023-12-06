@@ -2,6 +2,7 @@
 
 namespace PROJETO.A3.USJT.Models
 {
+    //Interface de auditoria
     public interface IUserDateLog
     {
         String? UsuarioInclusao { get; set; }

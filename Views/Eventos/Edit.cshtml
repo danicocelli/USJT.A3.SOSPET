@@ -1,63 +1,70 @@
 ﻿@model PROJETO.A3.USJT.Models.Evento
-
+@using PROJETO.A3.USJT.Models.Enums
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar";
     Layout = "~/Views/Shared/_LayoutPortal.cshtml";
 }
+@{
+    var voluntarios = ViewBag.Voluntarios as List<Voluntario>;
+}
 
-<h1>Edit</h1>
 
-<h4>Evento</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="EventoId" />
-            <div class="form-group">
-                <label asp-for="Titulo" class="control-label"></label>
-                <input asp-for="Titulo" class="form-control" />
-                <span asp-validation-for="Titulo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DescBreve" class="control-label"></label>
-                <input asp-for="DescBreve" class="form-control" />
-                <span asp-validation-for="DescBreve" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataEvento" class="control-label"></label>
-                <input asp-for="DataEvento" class="form-control" />
-                <span asp-validation-for="DataEvento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
-                <span asp-validation-for="Descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageDirectory" class="control-label"></label>
-                <input asp-for="ImageDirectory" class="form-control" />
-                <span asp-validation-for="ImageDirectory" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataInclusao" class="control-label"></label>
-                <input asp-for="DataInclusao" class="form-control" />
-                <span asp-validation-for="DataInclusao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Endereco" class="control-label"></label>
-                <input asp-for="Endereco" class="form-control" />
-                <span asp-validation-for="Endereco" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container">
+    <h3>Edição de Evento</h3>
+    <div class="row">
+        <div class="container">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">Título</label>
+                            <input asp-for="Titulo" class="form-control" />
+                            <span asp-validation-for="Titulo" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">Subtítulo</label>
+                            <input asp-for="DescBreve" class="form-control" />
+                            <span asp-validation-for="DescBreve" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">Data Evento</label>
+                            <input asp-for="DataEvento" class="form-control" />
+                            <span asp-validation-for="DataEvento" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Descrição</label>
+                            <input asp-for="Descricao" class="form-control" />
+                            <span asp-validation-for="Descricao" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Endereço</label>
+                            <input asp-for="Endereco" class="form-control" />
+                            <span asp-validation-for="Endereco" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 mt-3">
+                        <div class="form-group">
+                            <a asp-action="Index" class="btn btn-secondary">Voltar para lista</a>
+                            <input type="submit" value="Editar" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
